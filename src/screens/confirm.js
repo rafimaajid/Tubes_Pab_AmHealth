@@ -31,7 +31,7 @@ const Confirm = () => {
                             <Text style={{color: 'black'}}>close</Text>
                         </TouchableOpacity>
                         <Text style={{color: 'black', fontSize:18, marginTop: 15}}>
-                            Appoinrment Success
+                            Appointment Success 
                         </Text>
                     </View>
                 </view>
