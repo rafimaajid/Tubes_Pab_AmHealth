@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
  },
  markAllButton: {
     alignItems: 'center',
-    backgroundColor: '#007bff',
+    backgroundColor: '#3E8E00',
     padding: 15,
     marginTop: 10,
  },
