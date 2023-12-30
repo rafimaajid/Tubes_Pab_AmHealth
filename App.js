@@ -10,8 +10,9 @@ import NotificationScreen from './src/screens/NotificationScreen';
 import history from "./src/screens/history";
 import confirm from "./src/screens/confirm";
 import NewsDetail from "./src/screens/news-detail";
-import Home from './src/screens/home';
 import home from './src/screens/home';
+import MyProfile from './src/screens/profile';
+
 
 // Navigator Declaration
 const Stack = createNativeStackNavigator();
@@ -28,8 +29,12 @@ const TabNavigator = () => {
           switch (route.name) {
             case "home":
               iconName= "document-text-outline";
+              break;
             case "history":
               iconName = "document-text-outline";
+              break;
+            case "profile":
+              iconName = "checkmark-circle-outline";
               break;
             case "confirm":
               iconName = "checkmark-circle-outline";
@@ -58,6 +63,7 @@ const TabNavigator = () => {
       })}
     >
       <Tab.Screen name="home" component={Home}options={noHead}/>
+      <Tab.Screen name="profile" component={MyProfile}options={noHead}/>
       <Tab.Screen name="history" component={history} options={noHead} />
       <Tab.Screen name="confirm" component={confirm} options={noHead} />
     </Tab.Navigator>

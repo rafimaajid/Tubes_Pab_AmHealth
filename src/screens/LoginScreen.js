@@ -24,7 +24,7 @@ const handleLogin = () => {
    Alert.alert('Login Berhasil', 'Selamat datang di aplikasi AmHealth', [{ text: 'OK' }]);
    
    // Pindah ke halaman OTP setelah login berhasil
-   navigation.navigate('Notification');
+   navigation.navigate('Home');
 };
 
 const handleSignUp = () => {
