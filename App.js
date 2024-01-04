@@ -10,6 +10,9 @@ import NotificationScreen from './src/screens/NotificationScreen';
 import history from "./src/screens/history";
 import confirm from "./src/screens/confirm";
 import NewsDetail from "./src/screens/news-detail";
+import Date from "./src/screens/DATE1";
+import Time from "./src/screens/TIME";
+import Summary from "./src/screens/SUMMARY";
 import Home from './src/screens/home';
 import home from './src/screens/home';
 
@@ -75,6 +78,9 @@ const AppNavigator = () => {
           <Stack.Screen name="Notification" component={NotificationScreen} />
           <Stack.Screen name="Tabs" component={TabNavigator} options={noHead} />
           <Stack.Screen name="News Detail" component={NewsDetail} options={noHead} />
+          <Stack.Screen name="Date" component={Date} options={noHead} />
+          <Stack.Screen name="Time" component={Time} options={noHead} />
+          <Stack.Screen name="Summary" component={Summary} options={noHead} />
         </Stack.Navigator>
       </NavigationContainer>
     </NativeBaseProvider>
