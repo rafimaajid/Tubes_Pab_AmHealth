@@ -13,6 +13,8 @@ import NewsDetail from "./src/screens/news-detail";
 import Date from "./src/screens/DATE1";
 import Time from "./src/screens/TIME";
 import Summary from "./src/screens/SUMMARY";
+import Home from './src/screens/home';
+import home from './src/screens/home';
 
 // Navigator Declaration
 const Stack = createNativeStackNavigator();
@@ -27,6 +29,8 @@ const TabNavigator = () => {
         tabBarIcon: ({ focused, color }) => {
           let iconName;
           switch (route.name) {
+            case "home":
+              iconName= "document-text-outline";
             case "history":
               iconName = "document-text-outline";
               break;
@@ -56,6 +60,7 @@ const TabNavigator = () => {
         },
       })}
     >
+      <Tab.Screen name="home" component={Home}options={noHead}/>
       <Tab.Screen name="history" component={history} options={noHead} />
       <Tab.Screen name="confirm" component={confirm} options={noHead} />
     </Tab.Navigator>
@@ -67,6 +72,7 @@ const AppNavigator = () => {
     <NativeBaseProvider>
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Login">
+          <Stack.Screen name="Home" component={home} />
           <Stack.Screen name="Register" component={RegisterScreen} />
           <Stack.Screen name="Login" component={LoginScreen} />
           <Stack.Screen name="Notification" component={NotificationScreen} />

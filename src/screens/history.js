@@ -5,7 +5,7 @@ import { useNavigation } from "@react-navigation/native";
 import { Header } from "../../components";
 import datas from "../../datas";
 
-const Home = () => {
+const History = () => {
     const navigation = useNavigation();
     const renderitem = ({ item }) => {
         return (
@@ -47,4 +47,4 @@ const Home = () => {
         </>
     );
 };
-export default Home;
+export default History;
