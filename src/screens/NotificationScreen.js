@@ -1,55 +1,95 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, FlatList, TouchableOpacity, Image } from 'react-native';
+import app from '../config/firebase';
+import {getAuth} from "firebase/auth";
+import {Box, Text, FlatList, Pressable, NativeBaseProvider} from "native-base"
+import { StyleSheet, ActivityIndicator } from 'react-native';
+import { getFirestore, collection, getDocs, query, where, doc, updateDoc } from 'firebase/firestore';
 
 const NotificationScreen = (props) => {
  const [notifications, setNotifications] = useState([]);
  const [markedAsRead, setMarkedAsRead] = useState(false);
+ const [isLoading, setIsLoading] = useState(false);
+
+ const calculateTime = (timestamp) => {
+   const currentTime = new Date();
+   const postTime = new Date(timestamp * 1000); // Convert to milliseconds
+
+   const timeDifferenceInSeconds = Math.floor((currentTime - postTime) / 1000);
+
+   if (timeDifferenceInSeconds < 60) {
+       return `${timeDifferenceInSeconds} seconds ago`;
+   } else if (timeDifferenceInSeconds < 3600) {
+       const minutesAgo = Math.floor(timeDifferenceInSeconds / 60);
+       return `${minutesAgo} minutes ago`;
+   } else if (timeDifferenceInSeconds < 86400) {
+       const hoursAgo = Math.floor(timeDifferenceInSeconds / 3600);
+       return `${hoursAgo} hours ago`;
+   } else {
+       const daysAgo = Math.floor(timeDifferenceInSeconds / 86400);
+       return `${daysAgo} days ago`;
+   }
+}
 
  useEffect(() => {
-    // Anda bisa menggantikan data di bawah ini dengan data asli Anda
-    const data = [
-      { id: '1', title: 'Appointment Success', time: '2h', isRead: false },
-      { id: '2', title: 'Schedule Changed', time: '3h', isRead: false },
-      { id: '3', title: 'Appointment Cancelled', time: '1d', isRead: false },
-      { id: '4', title: 'New Paypal Added', time: '2h', isRead: false },
-      { id: '5', title: 'Video Call Appointment', time: '3h', isRead: false },
-    ];
-
-    setNotifications(data);
+   // Anda bisa menggantikan data di bawah ini dengan data asli Anda
+   setIsLoading(true)
+   const interval = setInterval(() => {
+      const auth = getAuth(app)
+      const db = getFirestore(app)
+      getDocs(query(collection(db, "notifications"), where("email", "==", auth.currentUser.email)))
+         .then((snapshot) => {
+            setNotifications(snapshot.docs.map(doc => ({id: doc.id, ...doc.data()})).sort((a,b) => a.time.seconds - b.time.seconds))
+            setIsLoading(false)
+         }) 
+   }, 10000)
  }, []);
 
  const handleMarkAllAsRead = () => {
     setMarkedAsRead(true);
 
-    const updatedNotifications = notifications.map(notification => ({
-      ...notification,
-      isRead: true,
-    }));
-
-    setNotifications(updatedNotifications);
+    const updatedNotifications = notifications.map(async notification => {
+      if(!notification.isRead){
+         const db = getFirestore(app)
+         const setChangeNotification = await updateDoc(doc(db, `notifications/${notification.id}`), {isRead: true})
+      }
+      return {
+         ...notification,
+         time: {nanoseconds: notification.time.nanoseconds, seconds: notification.time.seconds},
+         isRead: true,
+      }
+   });
+   setNotifications(updatedNotifications.map(item => item._j));
  };
 
  const renderItem = ({ item }) => (
-    <View style={styles.item}>
+    <Box style={styles.item} key={item.id}>
       {/* <Image source={require('./assets/notification.png')} style={styles.notificationIcon} /> */}
-      <View style={styles.content}>
+      <Box style={styles.content}>
         <Text style={[styles.title, item.isRead && styles.readTitle]}>{item.title}</Text>
-        <Text style={[styles.time, item.isRead && styles.readTime]}>{item.time}</Text>
-      </View>
-    </View>
+        <Text style={[styles.time, item.isRead && styles.readTime]}>{calculateTime(item.time.seconds)}</Text>
+      </Box>
+    </Box>
  );
 
  return (
-    <View style={styles.container}>
-      <FlatList
-        data={notifications}
-        renderItem={renderItem}
-        keyExtractor={item => item.id}
-      />
-      <TouchableOpacity style={styles.markAllButton} onPress={handleMarkAllAsRead}>
+   <NativeBaseProvider>
+    <Box style={styles.container}>
+      { isLoading ?
+         <Box style={{flex: 1, justifyContent: "center", alignItems: "center"}}>
+            <ActivityIndicator size="large" color="#007bff" />
+         </Box>
+         :
+         <FlatList
+            data={notifications}
+            renderItem={renderItem}
+            keyExtractor={item => item.id}
+         />
+      }
+      <Pressable style={styles.markAllButton} onPress={handleMarkAllAsRead}>
         <Text style={styles.markAllText}>Mark all as read</Text>
-      </TouchableOpacity>
-    </View>
+      </Pressable>
+    </Box>
+    </NativeBaseProvider>
  );
 };
 
@@ -90,7 +130,7 @@ const styles = StyleSheet.create({
  },
  markAllButton: {
     alignItems: 'center',
-    backgroundColor: '#3E8E00',
+    backgroundColor: '#007bff',
     padding: 15,
     marginTop: 10,
  },

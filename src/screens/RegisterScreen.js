@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Alert } from 'react-native';
+import {Box, Text, Input, Pressable, NativeBaseProvider, Image} from "native-base"
+import { StyleSheet, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import {getAuth, createUserWithEmailAndPassword} from "firebase/auth"
+import { getFirestore, collection, addDoc } from "firebase/firestore";
+import app from '../config/firebase';
+import "react-native-gesture-handler"
 
 
 const RegisterScreen = (props) => {
@@ -8,6 +13,7 @@ const RegisterScreen = (props) => {
    const [email, setEmail] = useState('');
    const [phoneNumber, setPhoneNumber] = useState('');
    const [password, setPassword] = useState('');
+   const [isLoading, setIsLoading] = useState(false)
    const navigation = useNavigation();
 
 const isValidName = (name) => {
@@ -22,7 +28,7 @@ const isValidPhoneNumber = (phoneNumber) => {
    return re.test(phoneNumber);
 };
 
-const handleRegistration = () => {
+const handleRegistration = async () => {
    if (!email || !phoneNumber || !name || !password) {
       Alert.alert('Error', 'Please fill all fields', [{ text: 'OK' }]);
       return;
@@ -39,48 +45,72 @@ const handleRegistration = () => {
       Alert.alert('Error', 'Nomor telepon harus berupa angka', [{ text: 'OK' }]);
       return;
    }
+   setIsLoading(true)
 
-   // Panggil API registrasi disini menggunakan informasi pengguna yang diisi
-   Alert.alert('Pendaftaran Berhasil', 'Silakan cek email Anda untuk aktivasi akun', [{ text: 'OK' }]);
-   navigation.navigate('Login');
+   const auth = getAuth(app)
+   const db = getFirestore(app)
+
+   const registerToProvider = await createUserWithEmailAndPassword(auth, email, password)
+   if(registerToProvider){
+      const addUserToDB = await addDoc(collection(db, "users"), {
+         name: name,
+         email: email,
+         phone: phoneNumber
+      });
+      if(addUserToDB){
+         // Panggil API registrasi disini menggunakan informasi pengguna yang diisi
+         Alert.alert('Pendaftaran Berhasil', 'Silakan cek email Anda untuk aktivasi akun', [{ text: 'OK' }]);
+         navigation.navigate('Login');
+      }
+   }
 };
 
 return (
-   <View style={styles.container}>
-      <Text style={styles.title}>AmHealth</Text>
+   <NativeBaseProvider>
+   <Box style={styles.container}>
+      <Image
+         source={require('../assets/amhealth.png')} // Menunjukkan path ke gambar dari folder assets
+         alt="Logo"
+         style={styles.logo} // Tambahkan gaya logo sesuai kebutuhan
+      />
       <Text style={styles.subtitle}>Nama</Text>
-      <TextInput
-      style={styles.input}
+      <Input
+      backgroundColor="#eee"
+      marginBottom="6"
       onChangeText={text => setName(text)}
       value={name}
       placeholder="Masukkan nama Anda"
       />
       <Text style={styles.subtitle}>Nomor Telepon</Text>
-      <TextInput
-      style={styles.input}
+      <Input
+      backgroundColor="#eee"
+      marginBottom="6"
       onChangeText={text => setPhoneNumber(text)}
       value={phoneNumber}
       placeholder="Masukkan nomor telepon Anda"
       />
       <Text style={styles.subtitle}>Email</Text>
-      <TextInput
-      style={styles.input}
+      <Input
+      backgroundColor="#eee"
+      marginBottom="6"
       onChangeText={text => setEmail(text)}
       value={email}
       placeholder="Masukkan alamat email Anda"
       />
       <Text style={styles.subtitle}>Kata Sandi</Text>
-      <TextInput
-      style={styles.input}
+      <Input
+      backgroundColor="#eee"
+      marginBottom="6"
       onChangeText={text => setPassword(text)}
       value={password}
       placeholder="Masukkan kata sandi Anda"
       secureTextEntry
       />
-      <TouchableOpacity style={styles.button} onPress={handleRegistration}>
-      <Text style={styles.buttonText}>Daftar</Text>
-      </TouchableOpacity>
-   </View>
+      <Pressable isDisabled={isLoading} style={styles.button} onPress={handleRegistration}>
+      <Text style={styles.buttonText}>Signup</Text>
+      </Pressable>
+   </Box>
+   </NativeBaseProvider>
 );
 };
 
@@ -96,6 +126,13 @@ const styles = StyleSheet.create({
       color: '#111',
       marginBottom: 12,
    },
+   logo: {
+      width: 300,
+      height: 100,
+      justifyContent: 'center',
+      alignItems: 'center',      
+      marginBottom: 40,
+   },
    subtitle: {
       fontSize: 18,
       color: '#111',
@@ -103,13 +140,11 @@ const styles = StyleSheet.create({
    },
    input: {
       backgroundColor: '#eee',
-      paddingHorizontal: 8,
-      paddingVertical: 8,
       borderRadius: 4,
       marginBottom: 12,
    },
    button: {
-      backgroundColor: '#3E8E00',
+      backgroundColor: '#006400',
       paddingHorizontal: 16,
       paddingVertical: 12,
       borderRadius: 4,
