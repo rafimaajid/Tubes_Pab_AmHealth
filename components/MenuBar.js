@@ -63,6 +63,16 @@ const MenuBar = () => {
             justifyContent: 'center',
             alignItems: 'center'
           }}>
+        <Icon name="alarm" size={25} color="#bdbdbd" />
+        <Text style={{fontSize: 13}}>Notification</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={{
+            flex: 1, 
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}>
         <Icon name="person" size={25} color="#bdbdbd" />
         <Text style={{fontSize: 13}}>Profile</Text>
         </TouchableOpacity>
