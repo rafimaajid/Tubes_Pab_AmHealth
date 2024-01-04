@@ -2,7 +2,7 @@ import { Image } from "expo-image";
 import { StyleSheet, View, Text, Pressable } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useNavigation } from "@react-navigation/native";
-import { Color, Border, FontSize } from "../GlobalStyles";
+import { Color, Border, FontSize } from "../assets/GlobalStyles";
 import {Calendar} from 'react-native-calendars';
 import React, { useState } from 'react';
 
@@ -15,7 +15,7 @@ const DATE1 = () => {
       <Image
         style={styles.picIcon}
         contentFit="cover"
-        source={require("../assets/pic.png")}
+        // source={require("../assets/pic.png")}
       />
       <Pressable
         style={[styles.back, styles.backPosition]}
@@ -24,7 +24,7 @@ const DATE1 = () => {
         <Image
           style={styles.icon}
           contentFit="cover"
-          source={require("../assets/back.png")}
+          // source={require("../assets/back.png")}
         />
       </Pressable>
       <View style={styles.dateChild} />

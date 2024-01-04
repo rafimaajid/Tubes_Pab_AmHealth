@@ -3,7 +3,7 @@ import { FlatList, StyleSheet, View, Pressable, Text, TouchableOpacity } from "r
 import { Image } from "expo-image";
 import { LinearGradient } from "expo-linear-gradient";
 import { useNavigation } from "@react-navigation/native";
-import { Border, FontSize, Color } from "../GlobalStyles";
+import { Border, FontSize, Color } from "../assets/GlobalStyles";
 
 const TIME = () => {
   const navigation = useNavigation();
@@ -15,7 +15,7 @@ const TIME = () => {
         <Image
           style={[styles.image8Icon, styles.backPosition]}
           contentFit="cover"
-          source={require("../assets/image-8.png")}
+          // source={require("../assets/image-8.png")}
         />
       </View>
       <Pressable
@@ -25,7 +25,7 @@ const TIME = () => {
         <Image
           style={styles.icon}
           contentFit="cover"
-          source={require("../assets/back.png")}
+          // source={require("../assets/back.png")}
         />
       </Pressable>
       <View style={styles.timeChild} />

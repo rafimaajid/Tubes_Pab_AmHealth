@@ -3,7 +3,7 @@ import { Image } from "expo-image";
 import { StyleSheet, Pressable, View, Text } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useNavigation } from "@react-navigation/native";
-import { Color, Border, FontSize } from "../GlobalStyles";
+import { Color, Border, FontSize } from "../assets/GlobalStyles";
 
 const SUMMARY = () => {
   const navigation = useNavigation();
@@ -17,7 +17,7 @@ const SUMMARY = () => {
         <Image
           style={styles.icon}
           contentFit="cover"
-          source={require("../assets/back1.png")}
+          // source={require("../assets/back1.png")}
         />
       </Pressable>
       <View style={[styles.setButton, styles.setLayout]}>
