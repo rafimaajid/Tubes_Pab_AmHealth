@@ -15,6 +15,8 @@ import Time from "./src/screens/TIME";
 import Summary from "./src/screens/SUMMARY";
 import Home from './src/screens/home';
 import home from './src/screens/home';
+import DetailClinic from './src/screens/DetailClinic';
+import EditProfile from './src/screens/EditProfile';
 
 // Navigator Declaration
 const Stack = createNativeStackNavigator();
@@ -81,6 +83,8 @@ const AppNavigator = () => {
           <Stack.Screen name="Date" component={Date} options={noHead} />
           <Stack.Screen name="Time" component={Time} options={noHead} />
           <Stack.Screen name="Summary" component={Summary} options={noHead} />
+          <Stack.Screen name="DetailClinic" component={DetailClinic} options={noHead} />
+          <Stack.Screen name="EditProfile" component={EditProfile} options={noHead} />
         </Stack.Navigator>
       </NavigationContainer>
     </NativeBaseProvider>
