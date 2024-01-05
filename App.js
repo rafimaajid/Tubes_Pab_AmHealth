@@ -17,6 +17,7 @@ import Home from './src/screens/home';
 import home from './src/screens/home';
 import DetailClinic from './src/screens/DetailClinic';
 import EditProfile from './src/screens/EditProfile';
+import Appointment from './src/screens/Appointment';
 
 // Navigator Declaration
 const Stack = createNativeStackNavigator();
@@ -85,6 +86,7 @@ const AppNavigator = () => {
           <Stack.Screen name="Summary" component={Summary} options={noHead} />
           <Stack.Screen name="DetailClinic" component={DetailClinic} options={noHead} />
           <Stack.Screen name="EditProfile" component={EditProfile} options={noHead} />
+          <Stack.Screen name="Appointment" component={Appointment} options={noHead} />
         </Stack.Navigator>
       </NavigationContainer>
     </NativeBaseProvider>
