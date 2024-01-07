@@ -2,6 +2,7 @@ import {TouchableOpacity} from 'react-native';
 import { View, Text, flex, HStack } from 'native-base';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { NativeBaseProvider } from 'native-base';
+import { useNavigation } from '@react-navigation/native';
 
 // const AppNavigator = () => {
 //   return (
@@ -16,6 +17,7 @@ import { NativeBaseProvider } from 'native-base';
 // }
 
 const MenuBar = () => {
+    const navigation = useNavigation()
     return (
       <NativeBaseProvider>
         <View 
@@ -32,8 +34,10 @@ const MenuBar = () => {
             flex: 1, 
             justifyContent: 'center',
             alignItems: 'center'
-          }}>
-        <Icon name="home" size={25} color="#3AA346" />
+          }}
+          onPress={() => navigation.navigate("Home")}
+        >
+        <Icon name="home" size={25} color={"#3AA346"} />
         <Text style={{fontSize: 13}}>Home</Text>
         </TouchableOpacity>
 
@@ -42,8 +46,10 @@ const MenuBar = () => {
             flex: 1, 
             justifyContent: 'center',
             alignItems: 'center'
-          }}>
-        <Icon name="calendar" size={25} color="#bdbdbd" />
+          }}
+          onPress={() => navigation.navigate("Appointment")}
+        >
+        <Icon name="calendar" size={25} color={"#bdbdbd"} />
         <Text style={{fontSize: 13}}>Appointment</Text>
         </TouchableOpacity>
 
@@ -52,8 +58,10 @@ const MenuBar = () => {
             flex: 1, 
             justifyContent: 'center',
             alignItems: 'center'
-          }}>
-        <Icon name="time" size={25} color="#bdbdbd" />
+          }}
+          onPress={() => navigation.navigate("History")}
+        >
+        <Icon name="time" size={25} color={"#bdbdbd"} />
         <Text style={{fontSize: 13}}>History</Text>
         </TouchableOpacity>
 
@@ -62,8 +70,10 @@ const MenuBar = () => {
             flex: 1, 
             justifyContent: 'center',
             alignItems: 'center'
-          }}>
-        <Icon name="alarm" size={25} color="#bdbdbd" />
+          }}
+          onPress={() => navigation.navigate("Notification")}
+        >
+        <Icon name="alarm" size={25} color={"#bdbdbd"} />
         <Text style={{fontSize: 13}}>Notification</Text>
         </TouchableOpacity>
 
@@ -72,8 +82,10 @@ const MenuBar = () => {
             flex: 1, 
             justifyContent: 'center',
             alignItems: 'center'
-          }}>
-        <Icon name="person" size={25} color="#bdbdbd" />
+          }}
+          onPress={() => navigation.navigate("Profile")}
+        >
+        <Icon name="person" size={25} color={"#bdbdbd"} />
         <Text style={{fontSize: 13}}>Profile</Text>
         </TouchableOpacity>
       </View>

@@ -2,7 +2,7 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { NativeBaseProvider, ScrollView, Text } from "native-base";
+import { NativeBaseProvider, ScrollView, Text, Avatar, Divider, Button } from "native-base";
 import { StyleSheet, View, TextInput, TouchableOpacity, Image} from 'react-native';
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { Icon, Box, Heading } from 'native-base';

@@ -31,7 +31,7 @@ const TIME = () => {
       <View style={styles.timeChild} />
       <Pressable
         style={[styles.setButton, styles.setLayout]}
-        onPress={() => navigation.navigate("SUMMARY")}
+        onPress={() => navigation.navigate("Summary")}
       >
         <LinearGradient
           style={[styles.setButtonChild, styles.setLayout]}

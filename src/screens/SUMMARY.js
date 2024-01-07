@@ -20,14 +20,14 @@ const SUMMARY = () => {
           // source={require("../assets/back1.png")}
         />
       </Pressable>
-      <View style={[styles.setButton, styles.setLayout]}>
+      <Pressable style={[styles.setButton, styles.setLayout]} onPress={() => navigation.navigate("Confirm")}>
         <LinearGradient
           style={[styles.setButtonChild, styles.setLayout]}
           locations={[0.28, 0.65, 1]}
           colors={["#3aa601", "#4fbe00", "#64e100"]}
         />
         <Text style={styles.setAppointment}>Set Appointment</Text>
-      </View>
+      </Pressable>
       <Text
         style={[styles.nameTitle, styles.nameTitleFlexBox]}
       >{`Appointment Summary

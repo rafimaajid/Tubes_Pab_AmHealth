@@ -3,7 +3,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NativeBaseProvider, Text } from "native-base";
-import { StyleSheet, View, TextInput, TouchableOpacity,} from 'react-native';
+import { Image } from 'native-base';
+import { StyleSheet, View, TextInput, TouchableOpacity, SafeAreaView, ScrollView} from 'react-native';
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { Icon, Box, Heading, } from 'native-base';
 import MenuBar from '../../components/MenuBar';
@@ -15,7 +16,7 @@ const DetailClinic = () => {
             <Heading textAlign={'center'} mt={5} mb={3}> Details Clinic</Heading>
             {/* image clinic ya kalo bisa */}
             <Image alignSelf="center" size="xl" source={{
-                uri: "https://images.unsplash.com/photo-1538108149393-fbbd81895907?q=80&w=1856&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}} alt="Klinik AM" size="xl" 
+                uri: "https://images.unsplash.com/photo-1538108149393-fbbd81895907?q=80&w=1856&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}} alt="Klinik AM"  
                 style={{ width: 330, height: 200, borderRadius: 10 }}/>
 
             <Box bgColor={'white'} mr={5} ml={5} mt={30} mb={30} h={465} borderRadius={'20'}>

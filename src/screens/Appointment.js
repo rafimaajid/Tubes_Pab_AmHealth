@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text, FlatList, TouchableOpacity} from 'react-native';
 
-const Appointment = () => {
+const Appointment = ({navigation}) => {
 
     const [data, setData] = useState([
         {
@@ -94,7 +94,7 @@ const Appointment = () => {
         <FlatList
           data={dataTampil}
           renderItem={({item}) => (
-            <View 
+            <TouchableOpacity 
               style={{
                 marginHorizontal:20,
                 marginTop: 10,
@@ -102,10 +102,12 @@ const Appointment = () => {
                 elevation: 2,
                 paddingVertical: 10,
                 paddingLeft: 10,
-              }}>
+              }}
+              onPress={() => navigation.navigate("DATE1")}
+            >
               <Text style={{fontWeight: 'bold'}}>{item.namaDokter}</Text>
               <Text>{item.namaPoli}</Text>
-            </View>
+            </TouchableOpacity>
           )} 
         />
       </View>

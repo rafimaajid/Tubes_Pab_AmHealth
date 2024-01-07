@@ -21,7 +21,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 //   )
 // }
 
-const home = () => {
+const Home = ({navigation}) => {
   return (
     <NativeBaseProvider>
 
@@ -32,7 +32,7 @@ const home = () => {
         </Text>
         <Text>Book an appointment with Doctor</Text>
 
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate("DetailClinic")}>
         <Box bgColor={'#bdbd'} mt={5} h={150} borderRadius={'10'}>
           <Image source={{
             uri: "https://i.pinimg.com/564x/36/a7/54/36a754bb0683784d982d3c23c3cde7a2.jpg"
@@ -73,4 +73,4 @@ const home = () => {
     )
 }
 
-export default home;
+export default Home;

@@ -1,11 +1,6 @@
-import {TouchableOpacity} from 'react-native';
 import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { NativeBaseProvider, Stack } from 'native-base';
-import { View, Text, Image, Heading, Box, ScrollView, SafeAreaView, Avatar } from 'native-base';
-import Icon from 'react-native-vector-icons/Ionicons';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { NativeBaseProvider, Text, Heading, Box, ScrollView, Avatar, Divider, Button } from 'native-base';
 
 const MyProfile = ({ navigation }) => {
   return (
@@ -58,7 +53,7 @@ const MyProfile = ({ navigation }) => {
         </Box>
 
         <Box alignItems={'center'} mt={5}>
-          <Button w={200} borderRadius={15}>
+          <Button w={200} borderRadius={15} onPress={() => navigation.navigate("EditProfile")}>
             Edit Profile
           </Button>
         </Box>
